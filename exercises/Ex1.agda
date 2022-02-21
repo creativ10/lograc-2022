@@ -12,7 +12,6 @@ module Ex1 where
 ----------------
 -- Exercise 0 --
 ----------------
-
 {-
    Begin by loading this Agda file in the editor of your choice (VS
    Code or Emacs, see README.md) using the `C-c C-l` command (to be
@@ -25,7 +24,6 @@ module Ex1 where
    and an additional buffer should appear and list the open goals
    (holes in Agda terminology) that need to be filled in this file:
 
-   ?0 : Bool
    ?1 : ℕ
    ?2 : ℕ
    ...
@@ -63,7 +61,10 @@ data Bool : Set where
 -}
 
 _⊕_ : Bool → Bool → Bool
-b ⊕ b' = {!!}
+true ⊕ true = false
+true ⊕ false = false
+false ⊕ true = false
+false ⊕ false = true
 
 {-
    You can test whether your definition computes correctly by using
@@ -95,7 +96,7 @@ data ℕ : Set where
 -}
 
 incr : ℕ → ℕ
-incr n = {!!}
+incr n = suc n
 
 {-
    Define a function that decrements a number by one. Give the definition
@@ -103,7 +104,8 @@ incr n = {!!}
 -}
 
 decr : ℕ → ℕ
-decr n = {!!}
+decr zero = 0
+decr (suc n) = n
 
 {-
    Define a function that triples the value of a given number.
@@ -111,7 +113,8 @@ decr n = {!!}
 -}
 
 triple : ℕ → ℕ
-triple n = {!!}
+triple zero = zero
+triple (suc n) = suc(suc(suc (triple n)))
 
 
 ----------------
@@ -142,8 +145,10 @@ infixl 7  _*_
 -}
 
 _^_ : ℕ → ℕ → ℕ
-m ^ n = {!!}
-
+zero ^ zero = suc zero
+zero ^ suc n = zero
+suc m ^ zero = suc zero
+suc m ^ suc n = suc m * suc m  ^ n
 infixl 8  _^_
 
 
@@ -178,7 +183,9 @@ infixl 20 _I
 -}
 
 b-incr : Bin → Bin
-b-incr b = {!!}
+b-incr ⟨⟩ = ⟨⟩
+b-incr (b O) = b I 
+b-incr (b I) =  (b-incr b) O\
 
 
 ----------------
@@ -405,3 +412,4 @@ length-≤-≦ᴸ xs ys p = {!!}
    - "less than or equal" order
    - show that `from` takes even numbers to even numbers
 -}
+   
